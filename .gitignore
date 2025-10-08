@@ -1,1 +1,7 @@
 /dataset
+
+# .env files
+/s1_postgresql/.env
+
+# misc
+/s1_postgresql/cmd.txt

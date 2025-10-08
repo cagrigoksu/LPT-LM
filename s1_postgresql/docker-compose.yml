@@ -1,0 +1,25 @@
+
+services:
+
+  # PostgreSQL 16 and new stockbook_db database. 
+  s1_postgresql:
+    image: postgres:16
+    container_name: lptlm_db
+    environment:
+      # configure these in .env
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      # postgre needs to be ready to accept connection, otherwice backend gives error.
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
